@@ -1,0 +1,91 @@
+set $mod Mod4
+
+gaps inner 5
+gaps outer 5
+
+client.focused		 #00d9ff #00d9ff #0a0a0f #0a0a0f
+client.focused_inactive	 #44475a #44475a #d9e0ee #0a0a0f
+client.unfocused	 #0a0a0f #0a0a0f #d9e0ee #0a0a0f
+client.urgent		 #ff007c #ff007c #0a0a0f #ff007c
+
+exec_always --no-startup-id polybar main
+
+title_align center
+font pango: JetBrains Mono 10
+
+mode "run: [s]earch, [b]rowser, [t]erminal, close(w)" {
+	bindsym s exec rofi -show drun -theme cyberpunk	
+	bindsym b exec firefox 
+	bindsym t exec kitty 
+	bindsym w kill
+	bindsym $mod+w kill
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+mode "exit: [r]eboot, s[h]utdown, [s]leep" {
+	bindsym r exec systemctl reboot
+	bindsym h exec systemctl shutdown
+	bindsym s exec systemctl sleep			
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+mode "i3: [e]xit, [r]estart, [c]onfig" {
+	bindsym e exit
+	bindsym r exec killall polybar && i3-msg restart
+	bindsym c exec kitty nvim ~/.config
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+mode "stats: [b]top, [g]otop" {
+	bindsym b exec kitty btop
+	bindsym g exec kitty gotop
+	bindsym Escape mode "default"
+	bindsym Return mode "default"
+}
+
+# Volume
+bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
+bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
+bindsym XF86AudioMute exec --no-startup-id pamixer -t
+
+# Brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
+bindsym XF86MonGrightnessDown exec --no-startup-id brightnessctl s 5%-
+
+# Screenshot
+bindsym $mod+s exec spectacle
+
+# Manage state of system
+bindsym $mod+x mode "exit: [r]eboot, s[h]utdown, [s]leep"
+# Manage state of i3
+bindsym $mod+i mode "i3: [e]xit, [r]estart, [c]onfig"
+# Run programs
+bindsym $mod+r mode "run: [s]earch, [b]rowser, [t]erminal, close(w)"
+# Check stats n stuff
+bindsym $mod+q mode "stats: [b]top, [g]otop"
+
+# Toggle fullscreen
+bindsym $mod+f fullscreen toggle global
+# Split horizontal
+bindsym $mod+h split horizontal
+# End process
+bindsym $mod+w kill
+
+# Workspaces
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+
+# Wallpaper
+exec --no-startup-id pgrep xwinwrap && pkill xwinwrap
+exec kitty xwinwrap -ni -o 0.8 -fs -s -st -sp -b -nf -- \
+  mpv -wid 0 --loop -no-audio --no-osc \
+  ~/Images/wallpapers/cyberpunk0.mp4
+exec gotop
+
+exec_always alternating_layouts.py

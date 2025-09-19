@@ -1,0 +1,8 @@
+* {
+	background: #0a0a0f;
+	foreground: #00d9ff;
+	selected:   #ff007c;
+	border:     0;
+	padding:    10px;
+	font:	    "JetBrainsMono Nerd Font 12";
+}
