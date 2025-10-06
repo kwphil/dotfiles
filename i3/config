@@ -1,5 +1,4 @@
 set $mod Mod4
-
 gaps inner 5
 gaps outer 5
 
@@ -10,8 +9,9 @@ client.urgent		 #ff007c #ff007c #0a0a0f #ff007c
 
 exec_always --no-startup-id polybar main
 
-title_align center
-font pango: JetBrains Mono 10
+# title_align center
+# font pango: JetBrains Mono 10
+for_window [class="^.*"] border pixel 2
 
 mode "run: [s]earch, [b]rowser, [t]erminal, close(w)" {
 	bindsym s exec rofi -show drun -theme cyberpunk	
@@ -25,7 +25,7 @@ mode "run: [s]earch, [b]rowser, [t]erminal, close(w)" {
 
 mode "exit: [r]eboot, s[h]utdown, [s]leep" {
 	bindsym r exec systemctl reboot
-	bindsym h exec systemctl shutdown
+	bindsym h exec systemctl poweroff
 	bindsym s exec systemctl sleep			
 	bindsym Escape mode "default"
 	bindsym Return mode "default"
@@ -46,6 +46,11 @@ mode "stats: [b]top, [g]otop" {
 	bindsym Return mode "default"
 }
 
+# mode "wallpaper: [i]mage, [v]ideo" {
+# 	bindsym i exec feh --bg-scale ~/Images/wallpapers/cyberpunk0.jpg
+# 	bindsym v exec 
+# }
+
 # Volume
 bindsym XF86AudioRaiseVolume exec --no-startup-id pamixer -i 5
 bindsym XF86AudioLowerVolume exec --no-startup-id pamixer -d 5
@@ -53,7 +58,7 @@ bindsym XF86AudioMute exec --no-startup-id pamixer -t
 
 # Brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
-bindsym XF86MonGrightnessDown exec --no-startup-id brightnessctl s 5%-
+bindsym XF86MonGrightnessDown exec --no-startup-id brightnessctl s 5-%
 
 # Screenshot
 bindsym $mod+s exec spectacle
@@ -72,7 +77,7 @@ bindsym $mod+f fullscreen toggle global
 # Split horizontal
 bindsym $mod+h split horizontal
 # End process
-bindsym $mod+w kill
+bindsym $mod+p kill
 
 # Workspaces
 bindsym $mod+1 workspace 1
@@ -83,8 +88,7 @@ bindsym $mod+5 workspace 5
 
 # Wallpaper
 exec --no-startup-id pgrep xwinwrap && pkill xwinwrap
-exec kitty xwinwrap -ni -o 0.8 -fs -s -st -sp -b -nf -- \
-  mpv -wid 0 --loop -no-audio --no-osc \
+exec_always mpv -wid 0 --loop -no-audio --no-osc \
   ~/Images/wallpapers/cyberpunk0.mp4
 exec gotop
 
