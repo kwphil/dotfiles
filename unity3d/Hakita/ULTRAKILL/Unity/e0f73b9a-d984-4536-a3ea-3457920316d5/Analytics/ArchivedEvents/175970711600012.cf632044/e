@@ -1,5 +1,0 @@
-(s)|{"appid":"e0f73b9a-d984-4536-a3ea-3457920316d5","userid":"29ce4dabff110ddcfb88f57a8d300835","sessionid":1346372811450307804,"platform":"LinuxPlayer","platformid":13,"sdk_ver":"u2022.3.29f1","runMode":"human-hub","sdk_rev":"8d510ca76d2b","session_count":54,"localprojectid":"9d828694f947623408fc56580299f45b","build_guid":"65f407becf604a2f80164ef0ea4bb8f2","deviceid":"0d71e5997a15424fbf784053412e8e0c","identity_token":"29ce4dabff110ddcfb88f57a8d300835"}
-(g)|2
-{"type":"analytics.input_shutdown.v1","msg":{"max_num_devices":3,"max_state_size_in_bytes":608,"total_event_bytes":2808088,"total_event_count":46418,"total_frame_count":24817,"total_event_processing_time":1.5209983587265015,"assembly_info":"Unity.InputSystem, Version=1.7.0.0, Culture=neutral, PublicKeyToken=null","ts":1759707116975,"t_since_start":650008196}}
-{"type":"analytics.appRunning.v1","msg":{"duration":640,"local_time_offset":21600000,"ts":1759707116985,"t_since_start":650018549}}
-(1){"type":"analytics.appStop.v1","msg":{"ts":1759707116985,"t_since_start":650018890}}
